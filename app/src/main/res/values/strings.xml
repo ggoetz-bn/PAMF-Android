@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">PAMF</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- Navigation -->
+    <string name="title_centergravity">Schwerpunkt</string>
+    <string name="title_cog_settings">Schwerpunkt Einstellungen</string>
+    <string name="title_rudder">Ruder</string>
+    <string name="title_ewd">EWD</string>
+    <string name="title_calibrate">Kalibrieren</string>
+
+    <!-- COG -->
+    <string name="cog_cog_front">Schwerpunkt ab Nasenleiste: %1$s! </string>
+
+    <!-- COG Settings -->
+    <string name="cog_s_type_1">Bugfahrwerk </string>
+    <string name="cog_s_type_2">Spornfahrwerk </string>
+    <string name="cog_s_scalesdistance">Abstand zwischen Waage 1 und 2 </string>
+    <string name="cog_s_distancefront_1">Abstand Waage 2 und Nasenleiste </string>
+    <string name="cog_s_distancefront_2">Abstand Waage 1 und Nasenleiste </string>
+    <string name="cog_s_distancetarget">Schwerpunktvorgabe ab Nasenleiste </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
