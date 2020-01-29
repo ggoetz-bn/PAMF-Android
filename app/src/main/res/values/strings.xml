@@ -12,15 +12,54 @@
     <string name="title_calibrate">Kalibrieren</string>
 
     <!-- COG -->
-    <string name="cog_cog_front">Schwerpunkt ab Nasenleiste: %1$s! </string>
+    <string name="cog_cog_front_static">Schwerpunkt ab Nasenleiste: \t\t</string>
+    <string name="cog_cog_front">\u00A0%1$smm </string>
+    <string name="cog_cog_diff_static"> Abweichung: \t\t</string>
+    <string name="cog_cog_diff">\u00A0%1$smm\u00A0</string>
+    <string name="cog_cog_diff_text_front"> zu weit vorne</string>
+    <string name="cog_cog_diff_text_back"> zu weit hinten</string>
+    <string name="cog_cog_diff_text_right"> wie vorgegeben</string>
 
     <!-- COG Settings -->
-    <string name="cog_s_type_1">Bugfahrwerk </string>
-    <string name="cog_s_type_2">Spornfahrwerk </string>
+    <string name="cog_s_type_1">Spornfahrwerk</string>
+    <string name="cog_s_type_2">Bugfahrwerk</string>
     <string name="cog_s_scalesdistance">Abstand zwischen Waage 1 und 2 </string>
     <string name="cog_s_distancefront_1">Abstand Waage 2 und Nasenleiste </string>
     <string name="cog_s_distancefront_2">Abstand Waage 1 und Nasenleiste </string>
     <string name="cog_s_distancetarget">Schwerpunktvorgabe ab Nasenleiste </string>
+    <string-array name="cog_spinner_values">
+        <item>1 Kg</item>
+        <item>5 Kg</item>
+        <item>10 Kg</item>
+    </string-array>
+
+    <!-- Ruderausschlag -->
+    <string name="rudder_type_1">Gleichlauf</string>
+    <string name="rudder_type_2">Gegenlauf</string>
+
+    <string name="rudder_sensor_a">Sensor A</string>
+    <string name="rudder_sensor_diff">Sensor A</string>
+    <string name="rudder_sensor_b">Sensor B</string>
+    <string name="rudder_angle">Winkel</string>
+    <string name="rudder_rudderway">Ruderweg</string>
+    <string name="rudder_tara">Tara</string>
+    <string name="rudder_record">Record</string>
+
+    <string name="rudder_s_maxdiff">Maximale Winkelabweichung</string>
+    <string name="rudder_s_width">Breite der Ruderfläche</string>
+    <string name="rudder_s_time">Record-Zeit</string>
+    <string name="rudder_s_start">Start</string>
+
+
+    <!-- Kalibrieren -->
+    <string name="cal_scale_unit1">Waage 1</string>
+    <string name="cal_scale_unit2">Waage 2</string>
+    <string name="cal_scale_unit3">Waage 3</string>
+    <string name="cal_scale_scale1000">1 Kg</string>
+    <string name="cal_scale_scale5000">5 Kg</string>
+    <string name="cal_scale_scale10000">10 Kg</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

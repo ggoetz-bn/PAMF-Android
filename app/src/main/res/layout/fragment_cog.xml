@@ -13,42 +13,101 @@
         android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/cog_tv_cog_front"
+        <LinearLayout
+            android:id="@+id/cog_ll_calculated"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:text="Schwerpunkt ab Nasenleiste: 80mm"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:text="Abweichung: 25mm zu weit vorne"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexWrap="wrap"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/bg_box_green"
+                android:padding="10dp">
+
+                <TextView
+                    style="@style/GreenBoxValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cog_cog_front_static"
+                    app:layout_flexGrow="1" />
+
+                <TextView
+                    android:id="@+id/cog_tv_cog_front"
+                    style="@style/GreenBoxValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minEms="5"
+                    android:singleLine="true"
+                    android:text="0mm"
+                    android:textAlignment="textEnd"
+                    app:layout_flexGrow="1"/>
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexWrap="wrap"
+                app:alignItems="stretch"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_box_green"
+                android:padding="10dp">
+
+                <TextView
+                    style="@style/GreenBoxValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cog_cog_diff_static"
+                    app:layout_flexGrow="100"/>
+
+                <TextView
+                    android:id="@+id/cog_tv_diff"
+                    style="@style/GreenBoxValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:text="0mm " />
+
+                <TextView
+                    android:id="@+id/cog_tv_diff_text"
+                    style="@style/GreenBoxValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cog_cog_diff_text_right"
+                    app:layout_flexGrow="1"
+                    android:textAlignment="textEnd"/>
+            </com.google.android.flexbox.FlexboxLayout>
+        </LinearLayout>
+
 
         <ImageView
             android:id="@+id/cog_iv_type"
-            android:layout_width="406dp"
-            android:layout_height="190dp"
-            android:layout_marginStart="32dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintDimensionRatio="12:5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:srcCompat="@drawable/img_sc_bugfahrwerk" />
+            app:layout_constraintTop_toBottomOf="@+id/cog_ll_calculated"
+            app:srcCompat="@drawable/img_cg_spornfahrwerk_2" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
-            android:layout_height="91dp"
+            android:layout_height="100dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,92 +115,119 @@
             app:layout_constraintTop_toBottomOf="@+id/cog_iv_type">
 
             <LinearLayout
+                style="@style/Box"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView3"
+                    style="@style/ValueMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Waage 1" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/cog_tv_weight1"
+                    style="@style/ValueMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="800 gr" />
 
-                <Button
-                    android:id="@+id/button"
+                <Spinner
+                    android:id="@+id/cog_sp_scale1"
+                    style="@style/MySpinnerStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1kg" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:entries="@array/cog_spinner_values" />
             </LinearLayout>
 
             <LinearLayout
+                style="@style/Box"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    style="@style/ValueMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Waage 2" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/cog_tv_weight2"
+                    style="@style/ValueMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="800 gr" />
 
-                <Button
-                    android:id="@+id/button1"
+                <Spinner
+                    android:id="@+id/cog_sp_scale2"
+                    style="@style/MySpinnerStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1kg" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:entries="@array/cog_spinner_values" />
+                <!--                    android:background="@drawable/bg_box" -->
             </LinearLayout>
 
             <LinearLayout
+                style="@style/Box"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView7"
+                    style="@style/ValueMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Waage 3" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/cog_tv_weight3"
+                    style="@style/ValueMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="800 gr" />
+                    android:text="800 gr"
 
-                <Button
-                    android:id="@+id/button3"
+                    />
+
+                <Spinner
+                    android:id="@+id/cog_sp_scale3"
+                    style="@style/MySpinnerStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1kg" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:entries="@array/cog_spinner_values"
+
+                    />
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="151dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="151dp"
-            android:text="Gesamt: 3.200gt."
+
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            >
+        <TextView
+            android:id="@+id/cog_tv_weight_sum"
+            style="@style/Box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Gesamt: 3.200gt."
+            android:textAlignment="center"
+            android:padding="10dp"
+            />
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

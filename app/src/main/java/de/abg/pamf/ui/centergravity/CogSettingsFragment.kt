@@ -1,13 +1,16 @@
 package de.abg.pamf.ui.centergravity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import de.abg.pamf.MainActivity
 import de.abg.pamf.R
 
 class CogSettingsFragment : Fragment() {
+
+    val TAG = "FRAGMENT_COG_S"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -15,12 +18,8 @@ class CogSettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_cog_settings, container, false)
-/*        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(this, Observer {
-            textView.text = it
-        })*/
 
-        // Setzt das Mnu (Zurück bzw. Speichern Button)
+        // Setzt das Menu (Zurück bzw. Speichern Button)
         setHasOptionsMenu(true)
 
         // Zeigt die gespeicherten Werte an
@@ -51,21 +50,21 @@ class CogSettingsFragment : Fragment() {
         // Unterschiedliche Texte und Bilder zeigen, je nachdem welches Fahrwerk ausgewählt ist
         if(CogData.type == 1) {
             root.findViewById<TextView>(R.id.cog_s_tv_distancefront).setText(R.string.cog_s_distancefront_1)
-            root.findViewById<ImageView>(R.id.cog_s_iv_type).setImageResource(R.drawable.img_sc_bugfahrwerk)
+            root.findViewById<ImageView>(R.id.cog_s_iv_type).setImageResource(R.drawable.img_cg_spornfahrwerk)
             root.findViewById<RadioGroup>(R.id.cog_s_rg_type).check(R.id.cog_s_rb_type_1)
         } else {
             root.findViewById<TextView>(R.id.cog_s_tv_distancefront).setText(R.string.cog_s_distancefront_2)
-            root.findViewById<ImageView>(R.id.cog_s_iv_type).setImageResource(R.drawable.img_sc_spornfahrwerk)
+            root.findViewById<ImageView>(R.id.cog_s_iv_type).setImageResource(R.drawable.img_cg_bugfahrwerk)
             root.findViewById<RadioGroup>(R.id.cog_s_rg_type).check(R.id.cog_s_rb_type_2)
         }
     }
 
     fun saveValues(){
-        CogData.distance_1_2 = this.view!!.findViewById<EditText>(R.id.cog_s_et_scalesdistance).text.toString().toIntOrNull() ?: 0
-        CogData.distance_front = this.view!!.findViewById<EditText>(R.id.cog_s_et_distancefront).text.toString().toIntOrNull() ?: 0
+//        Log.e(TAG, "saveData")
+        CogData.distance_1_2    = this.view!!.findViewById<EditText>(R.id.cog_s_et_scalesdistance).text.toString().toIntOrNull() ?: 0
+        CogData.distance_front  = this.view!!.findViewById<EditText>(R.id.cog_s_et_distancefront ).text.toString().toIntOrNull() ?: 0
         CogData.distance_target = this.view!!.findViewById<EditText>(R.id.cog_s_et_distancetarget).text.toString().toIntOrNull() ?: 0
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_settings, menu)
@@ -73,12 +72,14 @@ class CogSettingsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.e("Fragment", item.toString())
         return when (item.itemId) {
             R.id.navigation_cog_settings -> {
-                // Eingaben speichern
-                saveValues()
-//                activity!!.supportFragmentManager.popBackStack()
-                activity!!.finish()
+                (activity as MainActivity).navController.navigateUp()
+                true
+            }
+            android.R.id.home -> {
+                (activity as MainActivity).navController.navigateUp()
                 true
             }
             else -> super.onContextItemSelected(item)
@@ -87,6 +88,7 @@ class CogSettingsFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
+        // Eingaben speichern
         saveValues()
     }
 

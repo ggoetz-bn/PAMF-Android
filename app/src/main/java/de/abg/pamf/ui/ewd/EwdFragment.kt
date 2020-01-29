@@ -21,11 +21,7 @@ class EwdFragment : Fragment() {
     ): View? {
         ewdViewModel =
             ViewModelProviders.of(this).get(EwdViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_rudder, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        ewdViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
         return root
     }
 }

@@ -21,11 +21,8 @@ class CalibrateFragment : Fragment() {
     ): View? {
         calibrateViewModel =
             ViewModelProviders.of(this).get(CalibrateViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_rudder, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        calibrateViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+        val root = inflater.inflate(R.layout.fragment_calibrate, container, false)
+
         return root
     }
 }
