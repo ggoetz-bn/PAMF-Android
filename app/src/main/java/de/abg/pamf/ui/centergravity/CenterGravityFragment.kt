@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import de.abg.pamf.MainActivity
 import de.abg.pamf.R
+import de.abg.pamf.data.CogData
+import de.abg.pamf.ui.DataFragment
 
 
-class CenterGravityFragment : Fragment() {
+class CenterGravityFragment : Fragment(), DataFragment {
 
     val TAG = "COG_FRAGMENT"
 
@@ -30,47 +32,64 @@ class CenterGravityFragment : Fragment() {
         val scale1 = root.findViewById<Spinner>(R.id.cog_sp_scale1)
 //        scale1.adapter  = aa
 //        scale1.adapter
-        scale1.setSelection(when(CogData.scale_1){1000 -> 0 5000 -> 1 10000 -> 2 else -> 0}, false)
+//        scale1.setSelection(when(CogData.scale_1){1000 -> 0 5000 -> 1 10000 -> 2 else -> 0}, false)
+        CogData.scale_1_livedata.observe(this, Observer {
+            scale1.setSelection(when(it){1000 -> 0 5000 -> 1 10000 -> 2 else -> 0}, false)
+        })
 
         scale1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                Log.e(TAG, "something")
-                CogData.scale_1 = when(pos){
+                val value = when(pos){
                     0 -> 1000
                     1 -> 5000
                     2 -> 10000
                     else -> 1000
                 }
+                if( CogData.scale_1 != CogData.scale_1_livedata.value)
+                    CogData.scale_1 = value
             }
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
         val scale2 = root.findViewById<Spinner>(R.id.cog_sp_scale2)
-        scale2.setSelection(when(CogData.scale_2){1000 -> 0 5000 -> 1 10000 -> 2 else -> 0}, false)
+//        scale2.setSelection(when(CogData.scale_2){1000 -> 0 5000 -> 1 10000 -> 2 else -> 0}, false)
+        CogData.scale_2_livedata.observe(this, Observer {
+            scale2.setSelection(when(it){1000 -> 0 5000 -> 1 10000 -> 2 else -> 0}, false)
+        })
         scale2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                CogData.scale_2 = when(pos){
+                val value = when(pos){
                     0 -> 1000
                     1 -> 5000
                     2 -> 10000
                     else -> 1000
                 }
+                if( CogData.scale_2 != CogData.scale_2_livedata.value)
+                    CogData.scale_2 = value
             }
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
         val scale3 = root.findViewById<Spinner>(R.id.cog_sp_scale3)
-        scale3.setSelection(when(CogData.scale_3){1000 -> 0 5000 -> 1 10000 -> 2 else -> 0}, false)
+//        scale3.setSelection(when(CogData.scale_3){1000 -> 0 5000 -> 1 10000 -> 2 else -> 0}, false)
+        CogData.scale_3_livedata.observe(this, Observer {
+            scale3.setSelection(when(it){1000 -> 0 5000 -> 1 10000 -> 2 else -> 0}, false)
+        })
         scale3.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                CogData.scale_3 = when(pos){
+                val value = when(pos){
                     0 -> 1000
                     1 -> 5000
                     2 -> 10000
                     else -> 1000
                 }
-//                BluetoothCommunicator.sendMessage("1")
+                if( CogData.scale_3 != CogData.scale_3_livedata.value)
+                    CogData.scale_3 = value
             }
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+
+        root.findViewById<TextView>(R.id.cog_tv_tara_1).setOnClickListener { CogData.setZero('1')}
+        root.findViewById<TextView>(R.id.cog_tv_tara_2).setOnClickListener { CogData.setZero('2')}
+        root.findViewById<TextView>(R.id.cog_tv_tara_3).setOnClickListener { CogData.setZero('3')}
 /*        (scale3.getChildAt(0) as TextView).ellipsize = null
         (scale3.getChildAt(0) as TextView).minEms = 5
         (scale3.getChildAt(0) as TextView).width = 350*/
@@ -78,17 +97,10 @@ class CenterGravityFragment : Fragment() {
 //        (scale3.getChildAt(0) as TextView).layoutParams.width = 350
 
 
-/*        BluetoothCommunicator.sendMessage("EWD#0#START")
-        BluetoothCommunicator.sendMessage("EWD#0#START")*/
-
-        CogData.weight_1.observe(this, Observer<Int> {
-            root.findViewById<TextView>(R.id.cog_tv_weight1).text = "" + it + "gr"
-        })
-        CogData.weight_2.observe(this, Observer<Int> {
-            root.findViewById<TextView>(R.id.cog_tv_weight2).text = "" + it + "gr"
-        })
-        CogData.weight_3.observe(this, Observer<Int> {
-            root.findViewById<TextView>(R.id.cog_tv_weight3).text = "" + it + "gr"
+        CogData.weight.observe(this, Observer<IntArray> {
+            root.findViewById<TextView>(R.id.cog_tv_weight1).text = "" + it[0] + "gr"
+            root.findViewById<TextView>(R.id.cog_tv_weight2).text = "" + it[1] + "gr"
+            root.findViewById<TextView>(R.id.cog_tv_weight3).text = "" + it[2] + "gr"
         })
         CogData.weight_sum.observe(this, Observer<Int> {
             root.findViewById<TextView>(R.id.cog_tv_weight_sum).text = "Gesamt: " + it + "gr"
@@ -121,19 +133,7 @@ class CenterGravityFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.navigation_cog_settings -> {
-                Log.d("Fragment", "Click")
-/*                var nextFrag : CogSettingsFragment = CogSettingsFragment()
-                activity!!.supportFragmentManager.beginTransaction()
-                .hide(this)
-                .replace(R.id.nav_host_fragment, nextFrag, "cog_settings_fragment")
-                .addToBackStack(null)
-                .commit()*/
-
                 (activity as MainActivity).navController.navigate(R.id.navigation_cog_settings)
-//                (activity as MainActivity).navController.navigateUp()
-
-//                val intent = Intent(this.activity, CogSettingsActivity::class.java)
-//                startActivity(intent)
                 true
             }
             else -> super.onContextItemSelected(item)
@@ -145,15 +145,15 @@ class CenterGravityFragment : Fragment() {
         this.view!!.findViewById<ImageView>(R.id.cog_iv_type).setImageResource(
             if(CogData.type == 1) R.drawable.img_cg_spornfahrwerk_2 else R.drawable.img_cg_bugfahrwerk_2
         )
-
-//        this.view!!.findViewById<TextView>(R.id.cog_tv_cog_front).text = getString(R.string.cog_cog_front, "200")
-
-
         CogData.requestWeights()
     }
 
     override fun onPause() {
         super.onPause()
         CogData.stopRequestingWeights()
+    }
+
+    override fun onConnectionRestart() {
+        CogData.requestWeights()
     }
 }

@@ -1,9 +1,7 @@
 package de.abg.pamf.remote
 
-import de.abg.pamf.ui.centergravity.CogData
 import java.util.*
 import kotlin.concurrent.schedule
-import kotlin.math.round
 
 object FakeReceiver {
 
@@ -17,10 +15,10 @@ object FakeReceiver {
                     5000 -> CogData.weight_1.postValue(1000 + (round(Math.random() * 4000)).toInt())
                     10000 -> CogData.weight_1.postValue(1200 + (round(Math.random() * 8800)).toInt())
                 }*/
-
+                /*
                 CogData.weight_1.postValue(50)
                 CogData.weight_2.postValue(100)
-                CogData.weight_3.postValue(100)
+                CogData.weight_3.postValue(100)*/
 
             }
     }

@@ -5,10 +5,10 @@
     >
 
     <item
-        android:id="@+id/navigation_cog_settings"
-        android:icon="@android:drawable/checkbox_on_background"
+        android:id="@+id/navigation_back"
+        android:icon="@drawable/ic_check_white_24dp"
         android:menuCategory="alternative"
-        android:title="@string/title_cog_settings"
+        android:title="@string/title_safe"
         app:showAsAction="always|withText" />
 
 </menu>

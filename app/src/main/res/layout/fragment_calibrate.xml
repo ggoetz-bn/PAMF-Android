@@ -9,22 +9,22 @@
 
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/cal_btn_angle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Neigungssensor kalibrieren"
+        android:text="@string/cal_cal_tilt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/cal_btn_scale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Waage kalibrieren"
+        android:text="@string/cal_cal_scale"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/cal_btn_angle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

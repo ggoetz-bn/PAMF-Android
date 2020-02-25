@@ -21,6 +21,7 @@ class BtcClientThread(device: BluetoothDevice, uuid: UUID?) : Thread() {
         try {
             socket = device.createRfcommSocketToServiceRecord(uuid)
         } catch (e: IOException) {
+            BluetoothCommunicator.onConnectionError()
             Log.e(
                 TAG,
                 "createRfcommSocketToServiceRecord() failed",
@@ -34,6 +35,11 @@ class BtcClientThread(device: BluetoothDevice, uuid: UUID?) : Thread() {
             socket!!.connect()
             Log.d(TAG, "socket connect")
         } catch (connectException: IOException) {
+            BluetoothCommunicator.onConnectionError()
+            Log.e(
+                TAG,
+                "createRfcommSocketToServiceRecord() failed 2"
+            )
             cancel()
         }
     }

@@ -106,7 +106,7 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="136dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
@@ -138,9 +138,16 @@
                     android:id="@+id/cog_sp_scale1"
                     style="@style/MySpinnerStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:entries="@array/cog_spinner_values" />
+
+                <TextView
+                    android:id="@+id/cog_tv_tara_1"
+                    style="@style/GreenButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rudder_tara" />
             </LinearLayout>
 
             <LinearLayout
@@ -170,6 +177,12 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:entries="@array/cog_spinner_values" />
+                <TextView
+                    android:id="@+id/cog_tv_tara_2"
+                    style="@style/GreenButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rudder_tara" />
                 <!--                    android:background="@drawable/bg_box" -->
             </LinearLayout>
 
@@ -202,8 +215,13 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:entries="@array/cog_spinner_values"
-
                     />
+                <TextView
+                    android:id="@+id/cog_tv_tara_3"
+                    style="@style/GreenButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rudder_tara" />
             </LinearLayout>
         </LinearLayout>
 

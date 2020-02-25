@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.core.os.postDelayed
 
 
-class BluetoothMessage (val blocking : Boolean = true, val message : String, vararg response : Pair<String, ((String)->Boolean)>, val timeout : Long = 5000, timeoutFunction : (()-> Unit)? = null) {
+class BluetoothMessage (val blocking : Boolean = true, val resendOnError : Boolean = true, val message : String, vararg response : Pair<String, ((String)->Boolean)>, val timeout : Long = 5000, timeoutFunction : (()-> Unit)? = null, val send :Boolean = true) {
 
     /*
      * Es werden mögliche Antworten auf die Nachricht registriert.
@@ -19,6 +19,7 @@ class BluetoothMessage (val blocking : Boolean = true, val message : String, var
     private val timeoutRunnable = Runnable {if(responded == false) timeoutFunction()}
     private var sent = false
     private var responded = false
+
     var handler : Handler
 
     companion object {
@@ -27,8 +28,10 @@ class BluetoothMessage (val blocking : Boolean = true, val message : String, var
 
     init {
         handler = Handler()
-        // Bei der Initialisierung an den Bluetooth Communicator senden
-        BluetoothCommunicator.sendMessage(this)
+        if(send){
+            // Bei der Initialisierung an den Bluetooth Communicator senden
+            BluetoothCommunicator.sendMessage(this)
+        }
     }
 
     fun isSent() {
@@ -41,10 +44,20 @@ class BluetoothMessage (val blocking : Boolean = true, val message : String, var
         }
     }
 
+    fun onConnectionRestart(){
+        if(resendOnError){
+            BluetoothCommunicator.sendMessage(this)
+        }
+    }
+
     fun onDefaultTimeout(){
         Log.e(TAG, "TIMEOUT (after " + timeout + "ms): " + message)
-        // Diesen Response Listener entfernen
-        BluetoothCommunicator.unregisterMessageListener(this)
+        if(resendOnError){
+            BluetoothCommunicator.sendMessage(this)
+        } else {
+            // Diesen Response Listener entfernen
+            BluetoothCommunicator.unregisterMessageListener(this)
+        }
     }
 
     fun onResponse(responseText : String, responseFunction : ((String)->Boolean)){
