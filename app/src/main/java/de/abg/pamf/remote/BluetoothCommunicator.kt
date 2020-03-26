@@ -206,8 +206,9 @@ object BluetoothCommunicator {
     }
 
     fun sendMessage(message : BluetoothMessage){
+        if(blocker == message)
+            blocker = null
         m_sendQueue.add(message)
-
     }
 
 
@@ -253,6 +254,7 @@ object BluetoothCommunicator {
                         while (keepRunning) {
                             // Senden
                             // Nur senden, wenn es keinen Blocker gibt
+                            // TODO: Entfernt am 19.03
                             if(blocker == null) {
                                 val sendMsg = m_sendQueue.poll()
                                 if (sendMsg != null) {
@@ -263,7 +265,7 @@ object BluetoothCommunicator {
                             // Empfangen
                             val txt: String? = receive(inputS)
                             if (txt != null && txt.trim() != "") {
-                                Log.e(TAG, "Empfangen: " + txt.trim())
+                                Log.w(TAG, "Empfangen: " + txt.trim())
                                 m_responseString += txt.trim()
                                 // Teilen
                                 val split_str = m_responseString.split(";")
@@ -315,7 +317,7 @@ object BluetoothCommunicator {
                 m_sentList.add(message)
             // Nachricht senden
             os.write((message.message + ';').toByteArray())
-            Log.e(TAG, "Send: " + message.message + " (" + message.message.toByteArray() + ")")
+            Log.w(TAG, "Send: " + message.message + " (" + message.message.toByteArray() + ")")
             // Status der Nachricht auf gesendet setzen
             message.isSent()
             if(message.blocking)
